@@ -101,12 +101,15 @@
   <ItemGroup>
     <ClCompile Include="CTimage.cpp" />
     <ClCompile Include="imagearraysplinetry.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Spline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CTimage.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="imagearray.h" />
     <ClInclude Include="points.h" />
+    <ClInclude Include="Spline.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

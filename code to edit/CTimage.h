@@ -11,14 +11,21 @@
 //#include <fstream> 
 using namespace std;
 
+struct ImagePrivateMembers {
+	int columns = 0;
+	int rows = 0;
+	int maxVal = 0;
+	double x_z_pixelSize = 0.0;
+	double y_pixelSize = 0.0;
+
+} typedef IPM;
+
 // Structure for storing the image
  class Image
 { 
    int numberOfColumns, numberOfRows, maxVal;
 //variables for store spatial resolution in all directions
-   double  x_pixelSize, z_pixelSize, y_pixelSize; 
-// Array to store pixel data
-   unsigned char * imagedata;
+   double  x_z_pixelSize, y_pixelSize; 
 // String to store image header for Image writting functions
    char * imageheader;
 //Variable used to track the position of the image
@@ -27,11 +34,25 @@ using namespace std;
    long stringsize;
    //functions
 // Constructers 3 different types
-   Image() {};
+   
 
 public:
-  Image(const int&,const int&,const int&);
-  Image(const int&, const int&, const int&, const double& , const double&);
+  // Array to store pixel data
+  unsigned char * imagedata;
+  Image() {
+	  numberOfColumns = 0;
+	  numberOfRows =0;
+	  x_z_pixelSize =1;
+	  maxVal =255;
+          };
+
+  void initialize(const IPM &);
+  //Accesors
+  int getColumns() { return numberOfColumns; };
+  int getRows() { return numberOfRows; };
+  int getMaxVal() { return maxVal; };
+  long getStringSize() { return stringSize; };
+
 //Function to reallocate the image for cropping or maginification purposes
    void reallocate(const int&,const int&);
 //Image reading and writing functions

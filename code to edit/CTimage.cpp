@@ -3,43 +3,28 @@
 using namespace std; 
 // In class functions 
 //Default constructer 
-//void Image::initialize()
-//{ this->numberOfColumns =512;
-//  this->numberOfRows =512;
-//  this->x_pixelSize =0.4;
-//  this->z_pixelSize =0.4;
-//  this->maxVal =255;
-//  this-> stringsize = ((this->numberOfRows)*(this->numberOfColumns));
+//Image::Image()
+//{ this->numberofcolumns =512;
+//  this->numberofrows =512;
+//  this->x_pixelsize =0.4;
+//  this->z_pixelsize =0.4;
+//  this->maxval =255;
+//  this-> stringsize = ((this->numberofrows)*(this->numberofcolumns));
 //  this->imagedata  =(unsigned char*) malloc (sizeof(unsigned char)*(stringsize));
 //  this->imageheader  =( char*) malloc (sizeof(char)*(15));
-//  if(this->imagedata==NULL)
-//    { cout<<"\n  space allocation for Imagedata was not sucessfull ";
+//  if(this->imagedata==null)
+//    { cout<<"\n  space allocation for imagedata was not sucessfull ";
 //    }
 //}
 
-//Dynamic constructer (puts pixel size as 1 by default)
-Image::Image( const int& columns ,const  int& rows, const int& maxval)
-{numberOfColumns =columns;
- numberOfRows =rows;
- maxVal=maxval;
- x_pixelSize =1;
- z_pixelSize =1;
- y_pixelSize = 1;
- stringsize = ((numberOfRows)*(numberOfColumns));
- imagedata  =(unsigned char*) malloc (sizeof(unsigned char)*(stringsize));
- imageheader  =( char*) malloc (sizeof(char)*(15));
- if(imagedata==NULL)
-    { puts("\n  space allocation for Imagedata was not sucessfull ");
-    }
-}
+
 //Dynamic constructer (preferred)
-Image::Image(const int& columns , const int& rows, const int& maxval, const double& x_z_pixel, const double& y_pixel)
-{numberOfColumns =columns;
- numberOfRows =rows;
- maxVal=maxval;
- x_pixelSize =x_z_pixel;
- z_pixelSize =x_z_pixel;
- y_pixelSize =y_pixel;
+void Image::initialize(const IPM& ipm)
+{numberOfColumns =ipm.columns;
+ numberOfRows =ipm.rows;
+ maxVal=ipm.maxval;
+ x_z_pixelSize =ipm.x_z_pixel;
+ y_pixelSize =ipm.y_pixel;
  stringsize = ((this->numberOfRows)*(this->numberOfColumns));
  imagedata  =(unsigned char*) malloc (sizeof(unsigned char)*(stringsize));
  imageheader  =( char*) malloc (sizeof(char)*(15));
@@ -164,8 +149,8 @@ void  Image::writeImage (char foutname[])
 
   Dp3 Image:: stringToRealCords (const long int& i, const int& yInt)
   { double x, y, z;
-    x=(i % this->numberOfColumns)*this->x_pixelSize;
-    z= (i/this->numberOfColumns)*this->z_pixelSize;
+    x=(i % this->numberOfColumns)*this->x_z_pixelSize;
+    z= (i/this->numberOfColumns)*this->x_z_pixelSize;
     y =(yInt * this->y_pixelSize);
     return Dp3(x,y,z);
   } 
